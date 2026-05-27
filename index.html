@@ -1,0 +1,44 @@
+<div class="header">
+    <div class="alert-text">⚠️ ИГРАЙТЕ РАДИ УДОВОЛЬСТВИЯ, А НЕ РАДИ ЗАРАБОТКА ДЕНЕГ!</div>
+    <div class="sub-title">БАЛАНС КИБЕР-ФЕРМЫ</div>
+    <div class="balance-value">💰 <span id="coins">50</span></div>
+    <div class="financial-box">
+        <div>💵 Вы заработали: <span id="usd-balance">$0.0000</span></div>
+        <div class="rate-text">Ставка: $0.0020 за 1 просмотр рекламы (Прямая доля от рекламодателя)</div>
+        <div class="withdraw-text" id="withdraw-info">🔒 Вывод средств доступен от $10.0000</div>
+    </div>
+    <button class="btn-ad" onclick="watchAdBonus()">📺 Смотреть рекламу (+50 💰)</button>
+</div>
+
+<div class="section-header">🔮 Колесо Удачи и Сеть</div>
+<div class="shop-list horizontal">
+    <div class="card half">
+        <div id="wheel"></div>
+        <button class="btn" id="btn-spin" onclick="spinWheel()">Крутить Колесо</button>
+    </div>
+    <div class="card half left-text" style="gap: 12px; display: flex; flex-direction: column; justify-content: center;">
+        <div>🤝 Доход с рефералов: <span id="ref-usd" style="font-weight: bold; color: #4ade80;">$0.0000</span></div>
+        <button class="btn" id="btn-ref" onclick="simulateInvite()">📋 Скопировать ссылку</button>
+    </div>
+</div>
+
+<div class="section-header">🌱...</div>
+<div id="plots-grid" class="grid"></div>
+
+<div class="section-header">🐾 Био-Загон (Скрещивание)</div>
+<div id="animals-grid" class="grid"></div>
+
+<div class="section-header">🏪 Индустриальный Магазин</div>
+<div class="shop-list">
+    <div class="shop-item"><div class="shop-meta"><span class="shop-name">🚜 Модернизировать Грядки</span></div><button class="btn btn-buy" id="btn-up-crop" onclick="upgradeCropMult()">Улучшить</button></div>
+    <div class="shop-item"><div class="shop-meta"><span class="shop-name">🧬 Модернизировать Загон</span></div><button class="btn btn-buy" id="btn-up-anim" onclick="upgradeAnimMult()">Улучшить</button></div>
+    <div class="shop-item"><div class="shop-meta"><span class="shop-name">🌾 Новая культура</span></div><button class="btn btn-buy" id="btn-next-crop" onclick="unlockNextCrop()">Открыть</button></div>
+    <div class="shop-item"><div class="shop-meta"><span class="shop-name">🐄 Новое животное</span></div><button class="btn btn-buy" id="btn-next-anim" onclick="unlockNextAnim()">Открыть</button></div>
+    <div class="shop-item"><div class="shop-meta"><span class="shop-name">🍅 УФ-Теплица</span></div><button class="btn btn-buy" id="b-gh" onclick="buyAutomation('greenhouse')">200 💰</button></div>
+    <div class="shop-item"><div class="shop-meta"><span class="shop-name">🧀 Сырзавод</span></div><button class="btn btn-buy" id="b-fc" onclick="buyAutomation('factory')">500 💰</button></div>
+    <div class="shop-item"><div class="shop-meta"><span class="shop-name">🚜 Квантовый Трактор</span></div><button class="btn btn-buy" id="b-tr" onclick="buyAutomation('tractor')">2000 💰</button></div>
+    <div class="shop-item"><div class="shop-meta"><span class="shop-name">🧬 Био-Инкубатор</span></div><button class="btn btn-buy" id="b-ic" onclick="buyAutomation('incubator')">3500 💰</button></div>
+</div>
+
+<!-- Официальный рекламный скрипт TON Ads / AdGram -->
+<script src="https://adgram.io"></script>
