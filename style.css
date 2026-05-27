@@ -1,0 +1,29 @@
+body { font-family: sans-serif; background: #0b132b; color: #f8fafc; padding: 15px; text-align: center; user-select: none; }
+.header { background: linear-gradient(135deg, #1e1b4b, #311042); border: 2px solid #a855f7; padding: 16px; border-radius: 20px; margin-bottom: 20px; }
+.alert-text { font-size: 11px; color: #fbbf24; font-weight: bold; margin-bottom: 8px; }
+.sub-title { font-size: 11px; color: #94a3b8; }
+.balance-value { font-size: 28px; font-weight: 900; color: #fbbf24; margin: 5px 0; }
+.financial-box { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 10px; margin: 10px 0; font-size: 11px; text-align: left; line-height: 1.4; }
+.rate-text { color: #94a3b8; font-size: 10px; }
+.withdraw-text { margin-top: 5px; font-weight: bold; color: #f43f5e; }
+.btn-ad { background: linear-gradient(135deg, #d97706, #b45309); width: auto; padding: 10px 20px; border: none; color: white; border-radius: 10px; font-weight: bold; cursor: pointer; }
+.section-header { font-size: 16px; font-weight: 700; margin: 20px 0 10px; text-align: left; border-bottom: 2px solid #e2e8f033; padding-bottom: 5px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; min-height: 50px; }
+.card { background: #1c2541; border: 1px solid #334155; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; }
+.card.half { width: 50%; }
+.left-text { text-align: left; font-size: 12px; }
+.active-border { border-color: #38bdf8; }
+.progress-container { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 8px 0; overflow: hidden; }
+.progress-bar { height: 100%; width: 0%; background: #38bdf8; }
+.progress-bar.breeding { background: #ec4899; }
+.btn { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border: none; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 5px; }
+.btn:disabled { background: #334155 !important; color: #64748b !important; }
+.btn.collect { background: linear-gradient(135deg, #10b981, #047857); }
+.btn-test { background: #334155; font-size: 10px; padding: 4px; }
+.shop-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+.shop-list.horizontal { flex-direction: row; margin-bottom: 15px; }
+.shop-item { background: #1c2541; border-radius: 16px; padding: 14px; display: flex; justify-content: space-between; align-items: center; text-align: left; }
+.shop-meta { display: flex; flex-direction: column; }
+.shop-name { font-weight: bold; font-size: 14px; }
+.btn-buy { width: auto; min-width: 130px; background: #4338ca; border: none; color: white; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+#wheel { width: 60px; height: 60px; border-radius: 50%; border: 3px solid #a855f7; margin-bottom: 8px; transition: transform 3s cubic-bezier(0.1, 0.8, 0.1, 1); background: conic-gradient(#1e1b4b 0deg 90deg, #311042 90deg 180deg, #1e1b4b 180deg 270deg, #311042 270deg 360deg); }
