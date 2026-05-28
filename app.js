@@ -1,29 +1,21 @@
 window.onload = function() {
     const tg = window.Telegram?.WebApp; const pId = tg?.initDataUnsafe?.user?.id || Math.floor(100000 + Math.random() * 900000);
-
     const CROPS = [{ id: 'c1', name: "🌾 Пшеница", income: 10, time: 5 }, { id: 'c2', name: "🌽 Кукуруза", income: 30, time: 12, cost: 150 }, { id: 'c3', name: "🌱 Сено", income: 90, time: 25, cost: 600 }, { id: 'c4', name: "🍬 Сахар", income: 250, time: 50, cost: 2000 }];
     const ANIMALS = [{ id: 'a1', name: "🐓 Курица", income: 20, time: 8 }, { id: 'a2', name: "🐄 Корова", income: 60, time: 18, cost: 300 }, { id: 'a3', name: "🐑 Овечка", income: 180, time: 35, cost: 1000 }, { id: 'a4', name: "🐖 Свинья", income: 500, time: 70, cost: 4000 }];
 
     window.state = { coins: 50, cropMultiplier: 1, animMultiplier: 1, maxOpenCropIdx: 0, maxOpenAnimIdx: 0, timers: {}, statuses: {}, hasTractor: false, hasIncubator: false, hasGreenhouse: false, hasFactory: false, refViews: 0, adViews: 0 };
-    if (localStorage.getItem('farm_v8_save')) { try { Object.assign(window.state, JSON.parse(localStorage.getItem('farm_v8_save'))); } catch (e) {} }
 
     window.saveGame = function() {
-        localStorage.setItem('farm_v8_save', JSON.stringify(window.state));
         document.getElementById('coins').innerText = Math.floor(window.state.coins);
-        
         document.getElementById('btn-up-crop').innerText = `↑ (${window.state.cropMultiplier * 100}💰)`;
         document.getElementById('btn-up-anim').innerText = `↑ (${window.state.animMultiplier * 150}💰)`;
-        
         let nC = CROPS[window.state.maxOpenCropIdx + 1]; document.getElementById('btn-next-crop').innerText = nC ? `${nC.name} (${nC.cost}💰)` : "Все открыты";
         let nA = ANIMALS[window.state.maxOpenAnimIdx + 1]; document.getElementById('btn-next-anim').innerText = nA ? `${nA.name} (${nA.cost}💰)` : "Все открыты";
-        
         updateBtnState('b-tr', window.state.hasTractor, "2000 💰"); updateBtnState('b-ic', window.state.hasIncubator, "3500 💰");
         updateBtnState('b-gh', window.state.hasGreenhouse, "200 💰"); updateBtnState('b-fc', window.state.hasFactory, "500 💰");
-        
         let personalUsd = (window.state.adViews || 0) * 0.0020; let refUsd = (window.state.refViews || 0) * 0.0004; let totalUsd = personalUsd + refUsd;
-        document.getElementById('usd-balance').innerText = `$${totalUsd.toFixed(4)}`;
-        document.getElementById('ref-usd').innerText = `$${refUsd.toFixed(4)}`;
-        const wEl = document.getElementById('withdraw-info'); if (wEl) { if (totalUsd >= 10) { wEl.innerText = "🔓 Кнопка вывода активна!"; wEl.style.color = "#10b981"; } else { wEl.innerText = `🔒 Вывод доступен от $10.0000 (Осталось: $${(10 - totalUsd).toFixed(4)})`; } }
+        document.getElementById('usd-balance').innerText = `$${totalUsd.toFixed(4)}`; let el = document.getElementById('ref-usd'); if(el) el.innerText = `$${refUsd.toFixed(4)}`;
+        const wEl = document.getElementById('withdraw-info'); if (wEl) wEl.innerText = totalUsd >= 10 ? "🔓 Кнопка вывода активна!" : `🔒 Вывод доступен от $10.0000 (Осталось: $${(10 - totalUsd).toFixed(4)})`;
     }
 
     function updateBtnState(id, purchased, priceText) { let b = document.getElementById(id); if (!b) return; if (purchased) { b.innerText = "Куплено ✅"; b.style.background = "#10b981"; b.disabled = true; } else { b.innerText = priceText; b.style.background = "#4338ca"; b.disabled = false; } }
@@ -52,12 +44,13 @@ window.onload = function() {
         let b = document.getElementById('btn-spin'); if (b && b.disabled) return; if (b) b.disabled = true;
         const deg = Math.floor(Math.random() * 360) + 1800; const w = document.getElementById('wheel'); if (w) w.style.transform = `rotate(${deg}deg)`;
         setTimeout(() => {
-            let prizes = [10, 5, 20, 15]; let win = prizes[Math.floor((deg % 360) / 90)] || 5; window.state.coins += win; window.saveGame();
+            let prizes =; let win = prizes[Math.floor((deg % 360) / 90)] || 5; window.state.coins += win; window.saveGame();
             let old = b.innerText; b.innerText = `+${win}💰`; b.style.background = "#10b981"; setTimeout(() => { b.innerText = old; b.style.background = ""; b.disabled = false; }, 1500);
         }, 3000);
     }
 
     window.simulateInvite = function() { let b = document.getElementById('btn-ref'); let link = `https://t.me{pId}`; navigator.clipboard.writeText(link).then(() => { let old = b.innerText; b.innerText = "Скопировано! ✅"; b.style.background = "#10b981"; setTimeout(() => { b.innerText = old; b.style.background = ""; }, 1500); }); }
+    window.simulateFriendWatchedAd = function() { window.state.refViews = (window.state.refViews || 0) + 1; window.state.coins += 20; window.saveGame(); }
 
     window.renderGrid = function(type, data, maxIdx, targetId) {
         let html = ''; data.forEach((item, idx) => {
@@ -75,6 +68,14 @@ window.onload = function() {
         window.render();
     }, 1000);
 
-    window.watchAdBonus = function() { window.state.coins += 50; window.state.adViews = (window.state.adViews || 0) + 1; window.saveGame(); }
+    window.watchAdBonus = function() {
+        if (window.AdGram) {
+            AdGram.showRewardedVideo({
+                blockId: "ВАШ_БЛОК_РЕКЛАМЫ_ИЗ_ЛИЧНОГО_КАБИНЕТА",
+                onReward: function() { window.state.coins += 50; window.state.adViews = (window.state.adViews || 0) + 1; window.saveGame(); },
+                onError: function(err) { alert("Реклама временно не загрузилась."); }
+            });
+        } else { window.state.coins += 50; window.state.adViews = (window.state.adViews || 0) + 1; window.saveGame(); }
+    }
     window.render();
 }
