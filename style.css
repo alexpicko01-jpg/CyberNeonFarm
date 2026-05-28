@@ -1,8 +1,6 @@
-/* Полный сброс мобильных жестов и фиксация под экран смартфона */
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-html, body { width: 100%; height: 100%; overflow: hidden; background: #0b132b; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #0b132b; font-family: sans-serif; }
 body { padding: 0; color: #f8fafc; display: flex; justify-content: center; align-items: center; }
-
 .app-container { width: 100%; height: 100vh; max-width: 480px; display: flex; flex-direction: column; padding: 12px; position: relative; }
 .header { background: linear-gradient(135deg, #1e1b4b, #311042); border: 1.5px solid #a855f7; padding: 12px; border-radius: 16px; flex-shrink: 0; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2); }
 .alert-text { font-size: 10px; color: #fbbf24; font-weight: bold; margin-bottom: 4px; text-transform: uppercase; }
@@ -13,11 +11,8 @@ body { padding: 0; color: #f8fafc; display: flex; justify-content: center; align
 .rate-text { color: #94a3b8; font-size: 9px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 3px; margin-top: 3px; }
 .withdraw-text { text-align: center; margin-top: 4px; font-weight: bold; color: #f43f5e; font-size: 10px; }
 .btn-ad { background: linear-gradient(135deg, #d97706, #b45309); width: 100%; padding: 8px; border: none; color: white; border-radius: 10px; font-weight: bold; font-size: 12px; cursor: pointer; }
-
-/* Безопасная зона прокрутки для пальца */
 .scroll-content { flex-grow: 1; overflow-y: auto; padding-right: 2px; margin-top: 5px; padding-bottom: 24px; -webkit-overflow-scrolling: touch; }
-.scroll-content::-webkit-scrollbar { width: 0px; } /* Скрываем некрасивый системный скролл */
-
+.scroll-content::-webkit-scrollbar { width: 0px; }
 .section-header { font-size: 13px; font-weight: 700; margin: 14px 0 8px; text-align: left; border-bottom: 1px solid rgba(226,232,240,0.1); padding-bottom: 3px; color: #94a3b8; }
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; min-height: 40px; }
 .card { background: #1c2541; border: 1px solid #334155; border-radius: 14px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; min-height: 90px; }
@@ -28,7 +23,7 @@ body { padding: 0; color: #f8fafc; display: flex; justify-content: center; align
 .progress-container { width: 100%; height: 5px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 6px 0; overflow: hidden; }
 .progress-bar { height: 100%; width: 0%; background: #38bdf8; }
 .progress-bar.breeding { background: #ec4899; }
-.btn { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border: none; padding: 8px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer; width: 100%; }
+.btn { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border: none; padding: 8px; border-radius: 8px; font-weight: bold; font-size: 11px; cursor: pointer; width: 100%; margin-top: 5px; }
 .btn:disabled { background: #334155 !important; color: #64748b !important; }
 .btn.collect { background: linear-gradient(135deg, #10b981, #047857); }
 .shop-list { display: flex; flex-direction: column; gap: 8px; }
